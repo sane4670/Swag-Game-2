@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cfwb1i5abgsd"]
+
+[ext_resource type="Texture2D" uid="uid://bkqeunmkwgwcn" path="res://art/brackeys_platformer_assets/sprites/knight.png" id="1_7k104"]
+[ext_resource type="Script" uid="uid://bw0dfeuqjxyr6" path="res://enemy.gd" id="1_qi2p4"]
+[ext_resource type="PackedScene" uid="uid://1ufgu1cwx6x8" path="res://killzone.tscn" id="2_4gyqm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gyqm"]
+atlas = ExtResource("1_7k104")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi2p4"]
+atlas = ExtResource("1_7k104")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iifgy"]
+atlas = ExtResource("1_7k104")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epg4t"]
+atlas = ExtResource("1_7k104")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o72n1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gyqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi2p4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iifgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epg4t")
+}],
+"loop": 1,
+"name": &"enemyidle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi2p4"]
+size = Vector2(12, 18)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o72n1"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2009244491]
+script = ExtResource("1_qi2p4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=941483959]
+sprite_frames = SubResource("SpriteFrames_o72n1")
+animation = &"enemyidle"
+frame = 1
+frame_progress = 0.65902257
+
+[node name="Killzone" parent="." unique_id=524705600 instance=ExtResource("2_4gyqm")]
+position = Vector2(32, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=488121302]
+position = Vector2(-32, -17)
+shape = SubResource("RectangleShape2D_qi2p4")
+
+[node name="ground-collision" type="CollisionShape2D" parent="." unique_id=1267082155]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_o72n1")
